@@ -27,7 +27,7 @@ export const MyProjectSection = ({ categoriesWithProjects, github }: Props) => {
             <ChevronsUpDown className="size-4" />
             {currentCategory || "All projects"}
           </button>
-          <div className="bg-card shadow-subtle/10 pointer-events-none absolute right-0 z-10 grid w-full translate-y-4 rounded-md py-2 opacity-0 shadow-md transition-all group-focus-within:pointer-events-auto group-focus-within:translate-y-2 group-focus-within:opacity-100">
+          <div className="bg-card border-subtle/5 shadow-subtle/10 pointer-events-none absolute right-0 z-10 grid w-full translate-y-4 rounded-md border py-2 opacity-0 shadow-md transition-all group-focus-within:pointer-events-auto group-focus-within:translate-y-2 group-focus-within:opacity-100">
             <button className="hover:bg-foreground/10 flex cursor-pointer justify-start p-2 font-medium tracking-tight transition-colors" onClick={() => setCurrentCategory(null)}>
               {"All projects"}
             </button>
