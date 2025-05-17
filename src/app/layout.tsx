@@ -9,8 +9,8 @@ const fontSans = Golos_Text({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | JeanEudes',
-    default: 'Welcome',
+    default: "Home",
+    template: "%s | Jean Eudes",
   },
 };
 
@@ -21,11 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${fontSans.variable} antialiased font-sans text-foreground bg-background transition-colors`}
-      >
-        {children}
-      </body>
+      <body className={`${fontSans.variable} text-foreground bg-background font-sans antialiased transition-colors`}>{children}</body>
     </html>
   );
 }
