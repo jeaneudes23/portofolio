@@ -1,7 +1,7 @@
 "use client";
 
 import { Category, Link as LinkType, Project } from "@prisma/client";
-import { ChevronsUpDown, Github, GithubIcon } from "lucide-react";
+import { ChevronsUpDown, GithubIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";

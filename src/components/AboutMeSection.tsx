@@ -1,7 +1,5 @@
 import prisma from "@/lib/prisma";
-import { Link as LinkType } from "@prisma/client";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 interface Props {
