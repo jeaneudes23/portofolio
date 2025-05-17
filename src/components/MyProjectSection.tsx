@@ -19,10 +19,10 @@ export const MyProjectSection = ({ categoriesWithProjects }: Props) => {
   const projects = categoriesWithProjects.filter((category) => !currentCategory || category.name == currentCategory).flatMap((category) => category.projects);
   return (
     <section className="my-section px-padding container space-y-6 lg:space-y-10">
-      <div className="flex flex-wrap items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-header-section">My Projects</h2>
-        <div className="group relative min-w-44 text-sm">
-          <button className="border-subtle/50 inline-flex w-full cursor-pointer items-center gap-1 rounded-xl border-2 px-2 py-1 font-medium tracking-tight">
+        <div className="group relative basis-full text-sm sm:basis-44">
+          <button className="border-subtle/50 inline-flex w-full cursor-pointer items-center gap-1 rounded-xl border-2 px-2 py-1 font-medium tracking-tight whitespace-pre">
             <ChevronsUpDown className="size-4" />
             {currentCategory || "All"}
           </button>
