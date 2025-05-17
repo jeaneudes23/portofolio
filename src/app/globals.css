@@ -9,7 +9,7 @@
   --accent-foreground: hsl(210 40 98%);
   --backdrop: hsl(0 0 100%);
 
-  --card: hsl(0, 0%, 94%);
+  --card: hsl(0, 0%, 96%);
 
   --subtle: hsl(0, 0%, 25%);
   --border: hsl(0, 0%, 47%);
@@ -28,7 +28,7 @@
 
   --subtle: hsl(0, 0%, 80%);
   --border: hsl(0, 0%, 40%);
-  
+
 }
 
 @theme inline {
@@ -44,7 +44,7 @@
   --color-border: var(--border);
 
   --font-sans: var(--font-golos-text);
-  
+
 }
 
 @theme {

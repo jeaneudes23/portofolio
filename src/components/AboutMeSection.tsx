@@ -1,26 +1,29 @@
-import prisma from '@/lib/prisma'
-import Image from 'next/image'
-import React from 'react'
+import prisma from "@/lib/prisma";
+import Image from "next/image";
+import React from "react";
 
 interface Props {
-  about_me_description: string
+  about_me_description: string;
 }
-export const AboutMeSection = async ({about_me_description}: Props) => {
-  const tools = await prisma.tool.findMany()
+export const AboutMeSection = async ({ about_me_description }: Props) => {
+  const tools = await prisma.tool.findMany();
   return (
-    <section className='container px-padding grid md:grid-cols-2 gap-12 items-center'>
+    <section className="px-padding container grid items-center gap-12 md:grid-cols-2">
       <div>
-        <h2 className='text-header-section'>About Me</h2>
-        <p className='text-subtle tracking-wide leading-7 mt-4 mb-12'>{about_me_description}</p>
-        <hr className='text-subtle'/>
+        <h2 className="text-header-section">About Me</h2>
+        <p className="text-subtle mt-4 mb-12 leading-7 tracking-wide">{about_me_description}</p>
+        <hr className="text-subtle" />
       </div>
-      <div className='grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-1'>
-        {tools.map(tool => 
-          <div key={tool.id} className='bg-card p-6'>
-            <Image src={tool.icon} alt={tool.name} width={0} height={0} className='w-full max-w-24 mx-auto aspect-square object-contain'/>
+      <div className="grid grid-cols-2 gap-1 sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+        {tools.map((tool) => (
+          <div key={tool.id} className="bg-card group ring-accent relative cursor-pointer p-6 transition-all hover:z-10 hover:scale-110 hover:rounded-md hover:ring-2">
+            <Image src={tool.icon} alt={tool.name} width={0} height={0} className="mx-auto aspect-square w-full max-w-24 object-contain" />
+            <span aria-hidden className="bg-subtle text-background absolute top-2 right-2 scale-150 rounded-full px-2 py-1 text-xs font-medium capitalize opacity-0 shadow transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+              {tool.name}
+            </span>
           </div>
-        )}
+        ))}
       </div>
     </section>
-  )
-}
+  );
+};
