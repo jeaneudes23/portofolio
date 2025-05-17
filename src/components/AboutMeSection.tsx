@@ -4,14 +4,15 @@ import Image from "next/image";
 import React from "react";
 
 interface Props {
+  about_me_title: string;
   about_me_description: string;
 }
-export const AboutMeSection = async ({ about_me_description }: Props) => {
+export const AboutMeSection = async ({ about_me_description, about_me_title }: Props) => {
   const tools = await prisma.tool.findMany();
   return (
     <section className="px-padding container grid items-center gap-12 md:grid-cols-2">
       <div>
-        <h2 className="text-header-section">About Me</h2>
+        <h2 className="text-header-section">{about_me_title}</h2>
         <p className="text-subtle mt-4 mb-12 leading-7 tracking-wide">{about_me_description}</p>
         <hr className="text-subtle" />
       </div>

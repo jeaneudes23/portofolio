@@ -21,11 +21,13 @@ export default async function Home() {
   return (
     <>
       <Navbar />
-      <HeroSection />
-      <AboutMeSection about_me_description={content?.about_me_description || ""} />
-      <MyProjectSection github={links.filter((link) => link.name.toLocaleLowerCase() === "github")[0]} categoriesWithProjects={categoriesWithProjects} />
-      <ContactMeSection contact_me_description={content?.contact_me_description || ""} />
-      <Footer links={links} />
+      <main>
+        <HeroSection hero_title_first_line={content?.hero_title_first_line || ""} hero_title_second_line={content?.hero_title_second_line || ""} hero_title_third_line={content?.hero_title_third_line || ""} />
+        <AboutMeSection about_me_title={content?.about_me_title || ""} about_me_description={content?.about_me_description || ""} />
+        <MyProjectSection github={links.filter((link) => link.name.toLocaleLowerCase() === "github")[0]} categoriesWithProjects={categoriesWithProjects} />
+        <ContactMeSection contact_me_description={content?.contact_me_description || ""} />
+        <Footer links={links} />
+      </main>
     </>
   );
 }

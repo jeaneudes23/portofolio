@@ -55,7 +55,7 @@ export const ContactForm = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <SubmitButton className="group bg-primary text-primary-foreground inline-flex items-center gap-2 justify-self-center rounded-md px-6 py-3 font-medium tracking-wide">
+        <SubmitButton className="group bg-primary text-primary-foreground justify-self-center rounded-md px-6 py-3 font-medium tracking-wide">
           <span className="h-6 overflow-hidden">
             <span className="grid transition-all duration-300 ease-out group-hover:-translate-y-6">
               <span>Send Message</span>
