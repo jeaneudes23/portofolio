@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: hsl(210 40 98%);
+  --foreground: hsl(0 0 7%);
+  --primary: hsl(351 43 44%);
+  --primary-foreground: hsl(210 40 98%);
+  --accent: hsl(240 38 47%);
+  --accent-foreground: hsl(210 40 98%);
+  --backdrop: hsl(0 0 100%);
+
+  --card: hsl(0, 0%, 94%);
+
+  --subtle: hsl(0, 0%, 25%);
+  --border: hsl(0, 0%, 47%);
+}
+
+.dark {
+  --background: hsl(0 0 7%);
+  --foreground: hsl(210 40 98%);
+  --primary: hsl(351 43 44%);
+  --primary-foreground: hsl(210 40 98%);
+  --accent: hsl(240 38 37%);
+  --accent-foreground: hsl(210 40 98%);
+  --backdrop: hsl(0, 11%, 95%);
+
+  --card: hsl(0, 0%, 10%);
+
+  --subtle: hsl(0, 0%, 80%);
+  --border: hsl(0, 0%, 40%);
+  
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-backdrop: var(--backdrop);
+  --color-subtle: var(--subtle);
+  --color-card: var(--card);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-golos-text);
+  
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --spacing-navbar: 5rem;
+  --spacing-padding: 1rem;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility text-header-main {
+  @apply grid text-5xl md:text-8xl font-extrabold tracking-tight
+}
+
+@utility text-header-section {
+  @apply text-3xl lg:text-5xl tracking-wide font-bold
+}
+
+@utility container {
+  @apply max-w-6xl mx-auto w-full
+}
+
+@utility my-section {
+  @apply my-16 lg:my-24
+}
+
+/* buttons */
+
+
+
+
+.text-stroked {
+  -webkit-text-stroke: 1.5px var(--foreground);
 }
