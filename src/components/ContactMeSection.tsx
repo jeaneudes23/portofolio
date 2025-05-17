@@ -39,13 +39,13 @@ export const ContactForm = () => {
           <label htmlFor="name" className="text-subtle bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight">
             Name
           </label>
-          <input className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="name" id="email" />
+          <input autoComplete="off" className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="name" id="name" />
         </div>
         <div className="grid">
           <label className="text-subtle bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight" htmlFor="name">
             Email
           </label>
-          <input className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="email" id="email" />
+          <input autoComplete="off" className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="email" id="email" />
         </div>
         <div className="col-span-full grid">
           <label className="text-subtle bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight" htmlFor="name">
