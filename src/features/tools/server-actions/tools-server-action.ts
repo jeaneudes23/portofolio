@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { ServerActionResponse } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 
 export async function editTool(prev: unknown, formData: FormData): Promise<ServerActionResponse> {
 
@@ -26,14 +27,17 @@ export async function editTool(prev: unknown, formData: FormData): Promise<Serve
       }
     })
   } catch (error) {
+    console.error(error)
     return {
       ok: false,
       message: 'DB error',
     }
   }
+
+  revalidatePath('/')
   return {
     ok: true,
-    message: "Tool edited successfully"
+    message: "Tool updated"
   }
 }
 
@@ -52,15 +56,17 @@ export async function deleteTool(prev: unknown, formData: FormData): Promise<Ser
       where: { id }
     });
   } catch (error) {
+    console.error(error)
     return {
       ok: false,
       message: "DB error"
     };
   }
 
+  revalidatePath('/')
   return {
     ok: true,
-    message: "Tool deleted successfully"
+    message: "Tool removed"
   };
 }
 
@@ -78,14 +84,16 @@ export async function createTool(prev: unknown, formData: FormData): Promise<Ser
       }
     });
   } catch (error) {
+    console.error(error)
     return {
       ok: false,
       message: "DB error"
     };
   }
 
+  revalidatePath('/')
   return {
     ok: true,
-    message: "Tool created successfully"
+    message: "Tool added"
   };
 }

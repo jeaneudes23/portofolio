@@ -8,6 +8,7 @@ export async function editMetadata(_prev: unknown, formData: FormData): Promise<
   const title = formData.get("title") as string
   const description = formData.get("description") as string
   const keywords = formData.get("keywords") as string
+  const image = formData.get("image") as string
 
   const metadata = await prisma.metadata.findFirst()
 
@@ -21,16 +22,13 @@ export async function editMetadata(_prev: unknown, formData: FormData): Promise<
       where: {
         id: metadata.id
       },
-      data: {
-        title, description, keywords: keywords.split(',').map(keyword => keyword.trim())
-      }
+      data: { title, description, keywords: keywords.split(',').map(keyword => keyword.trim()), image }
     })
   } catch (error) {
     console.log(error)
   }
 
   revalidatePath('/')
-
   return {
     ok: true,
     message: 'Haahah'

@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader } from "lucide-react";
-import React, { ButtonHTMLAttributes } from "react";
+import React from "react";
 import { useFormStatus } from "react-dom";
 import { Button, ButtonProps } from "./ui/button";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { File, X } from "lucide-react";
-import { CldUploadWidget, CloudinaryUploadWidgetInfo, CloudinaryUploadWidgetResults } from "next-cloudinary";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
@@ -34,7 +34,7 @@ export const CustomFileUploader = ({ defaultUrl, name }: Props) => {
                   <X className="size-5" />
                 </Button>
               ) : (
-                <button className="bg-secondary flex w-full cursor-pointer items-center justify-center gap-1 rounded-xl p-6 text-sm font-medium" type="button" onClick={() => open()}>
+                <button className="bg-secondary flex w-full cursor-pointer items-center justify-center gap-1 rounded-xl border p-6 text-sm font-medium" type="button" onClick={() => open()}>
                   <File className="size-5" />
                   Upload an Image
                 </button>

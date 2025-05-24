@@ -29,7 +29,7 @@ model Project {
   url String
   order Int
 
-  category Category @relation(fields: [categoryId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id] , onDelete: Cascade)
   categoryId String @db.ObjectId
 }
 
@@ -64,4 +64,5 @@ model Metadata {
   title String
   description String
   keywords String[]
+  image       String
 }

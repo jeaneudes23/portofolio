@@ -3,7 +3,7 @@
 import { SubmitButton } from "@/components/SubmitButton";
 import { Content } from "@prisma/client";
 import React, { PropsWithChildren, useRef, useState, useTransition } from "react";
-import { editContent } from "../server-actions/editContent";
+import { editContent } from "../server-actions/content-server-actions";
 import { Pencil } from "lucide-react";
 import toast from "react-hot-toast";
 

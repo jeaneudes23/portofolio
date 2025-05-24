@@ -20,7 +20,7 @@ export async function editContent(formData: FormData): Promise<ServerActionRespo
   try {
     await prisma.content.update({
       where: {
-        id: content?.id
+        id: content.id
       },
       data: {
         [field]: value
@@ -30,7 +30,7 @@ export async function editContent(formData: FormData): Promise<ServerActionRespo
     console.error(error)
     return {
       ok: false,
-      message: 'Operation failed'
+      message: 'DB error'
     }
   }
 

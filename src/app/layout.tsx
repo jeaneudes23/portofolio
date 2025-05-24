@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Golos_Text } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import { Navbar } from "@/components/Navbar";
 
 const fontSans = Golos_Text({
   variable: "--font-golos-text",
@@ -21,7 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.variable} text-foreground bg-background font-sans antialiased transition-colors`}>{children}</body>
+      <body className={`${fontSans.variable} text-foreground bg-background font-sans antialiased transition-colors`}>
+        <Navbar />
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }

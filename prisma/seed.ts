@@ -154,7 +154,8 @@ export async function main() {
     data: {
       title: 'Jean Eudes Nihangaza',
       description: 'Web Developer Based In Rwanda',
-      keywords: ['web', 'developer', 'web developer', 'software developer']
+      keywords: ['web', 'developer', 'web developer', 'software developer'],
+      image: "https://hoopshype.com/lists/78-greatest-nba-players-ever-hoopshype-list/"
     }
   })
 }

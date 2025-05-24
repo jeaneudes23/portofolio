@@ -1,5 +1,5 @@
 import React from "react";
-import { EditContent } from "../features/content/components/EditContent";
+import { EditContent } from "./EditContent";
 
 interface Props {
   about_me_title: string;

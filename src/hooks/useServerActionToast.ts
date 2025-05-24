@@ -14,10 +14,11 @@ export const useServerActionToast = ({ state, callback }: Props) => {
     if (state.message) {
       if (state.ok) {
         toast.success(state.message)
-        callback && callback()
+        if (callback) callback()
       } else {
         toast.error(state.message)
       }
     }
-  }, [state])
+  }, [state, callback])
+
 }
