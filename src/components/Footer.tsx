@@ -9,7 +9,7 @@ export const Footer = ({ links }: Props) => {
   return (
     <footer className="border-subtle/50 px-padding border-t py-6 text-sm">
       <div className="container flex flex-wrap items-center justify-center gap-2 sm:justify-between">
-        <p className="text-subtle font-medium">© Copyright {new Date().getFullYear()}. All rights reserved.</p>
+        <p className="text-muted-foreground font-medium">© Copyright {new Date().getFullYear()}. All rights reserved.</p>
         <div className="flex items-center justify-center gap-2">
           {links.map((link) => (
             <Link className="font-medium capitalize hover:underline" target="_blank" href={link.url} key={link.id}>

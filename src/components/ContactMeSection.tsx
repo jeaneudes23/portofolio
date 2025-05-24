@@ -3,6 +3,7 @@
 import React from "react";
 import { SubmitButton } from "./SubmitButton";
 import { Mail } from "lucide-react";
+import { CustomFileUploader } from "./CustomFileUploader";
 
 interface Props {
   contact_me_description: string;
@@ -23,7 +24,7 @@ export const ContactMeSection = ({ contact_me_description }: Props) => {
       <div className="relative mx-auto max-w-2xl space-y-4">
         <div className="space-y-4">
           <h2 className="text-header-section text-center">Contact Me</h2>
-          <p className="text-subtle mx-auto max-w-md text-center text-balance">{contact_me_description}</p>
+          <p className="text-muted-foreground mx-auto max-w-md text-center text-balance">{contact_me_description}</p>
         </div>
         <ContactForm />
       </div>
@@ -36,24 +37,25 @@ export const ContactForm = () => {
     <form action="" className="space-y-6">
       <div className="grid items-start gap-x-4 text-sm sm:grid-cols-2 md:grid-cols-2">
         <div className="grid">
-          <label htmlFor="name" className="text-subtle bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight">
+          <label htmlFor="name" className="bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight">
             Name
           </label>
-          <input autoComplete="off" className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="name" id="name" />
+          <input autoComplete="off" className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="name" id="name" />
         </div>
         <div className="grid">
-          <label className="text-subtle bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight" htmlFor="name">
+          <label className="bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight" htmlFor="name">
             Email
           </label>
-          <input autoComplete="off" className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="email" id="email" />
+          <input autoComplete="off" className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="email" id="email" />
         </div>
         <div className="col-span-full grid">
-          <label className="text-subtle bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight" htmlFor="name">
+          <label className="bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight" htmlFor="name">
             Message
           </label>
-          <textarea rows={4} className="bg-background focus-within:border-primary border-subtle/50 w-full rounded-md border-2 p-3 transition-colors outline-none" name="message" id="message"></textarea>
+          <textarea rows={4} className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" name="message" id="message"></textarea>
         </div>
       </div>
+      <CustomFileUploader name="image" />
       <div className="flex justify-center">
         <SubmitButton className="group bg-primary text-primary-foreground justify-self-center rounded-md px-6 py-3 font-medium tracking-wide">
           <span className="h-6 overflow-hidden">

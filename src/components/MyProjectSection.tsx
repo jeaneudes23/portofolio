@@ -41,13 +41,13 @@ export const MyProjectSection = ({ categoriesWithProjects, github }: Props) => {
       </div>
       <div className="col-span-full grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <Link className="bg-card border-subtle/5 shadow-subtle/10 overflow-hidden rounded-xl border shadow-lg transition-all duration-500 hover:-translate-y-2" href={project.url} target="_blank" key={project.id}>
+          <Link className="bg-card overflow-hidden rounded-xl border shadow-lg transition-all duration-500 hover:-translate-y-2" href={project.url} target="_blank" key={project.id}>
             <div className="relative aspect-video w-full">
               <Image src={project.image} fill className="object-cover" alt={project.image} />
             </div>
             <div className="space-y-2 p-3 lg:p-6">
               <h3 className="text-lg font-bold lg:text-2xl">{project.name}</h3>
-              <p className="text-subtle text-sm">{project.summary}</p>
+              <p className="text-muted-foreground text-sm">{project.summary}</p>
             </div>
           </Link>
         ))}

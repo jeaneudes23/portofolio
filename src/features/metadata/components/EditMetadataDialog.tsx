@@ -4,7 +4,7 @@ import React, { useActionState, useContext, useEffect } from "react";
 import { Metadata } from "@prisma/client";
 import { editMetadata } from "../server-actions/metadata-server-action";
 import { SubmitButton } from "@/components/SubmitButton";
-import { Dialog, DialogContent, DialogContext, DialogDescription, DialogTitle } from "@/components/Dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -14,7 +14,7 @@ interface Props {
 
 export const EditMetadataDialog = ({ metadata }: Props) => {
   return (
-    <Dialog label="Jeunih">
+    <Dialog>
       <DialogTitle>Edit MetaData</DialogTitle>
       <DialogDescription>Handle Metadata</DialogDescription>
       <DialogContent>
@@ -25,8 +25,6 @@ export const EditMetadataDialog = ({ metadata }: Props) => {
 };
 
 const EditMetaDataForm = ({ metadata }: Props) => {
-  const { close } = useContext(DialogContext);
-
   const [state, action] = useActionState(editMetadata, {});
 
   const { refresh } = useRouter();
