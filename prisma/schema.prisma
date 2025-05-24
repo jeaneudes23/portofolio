@@ -29,7 +29,7 @@ model Project {
   url String
   order Int
 
-  category Category @relation(fields: [categoryId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id] , onDelete: Cascade)
   categoryId String @db.ObjectId
 }
 
@@ -42,7 +42,14 @@ model Tool {
 
 model Content {
   id String @id @map("_id") @default(auto()) @db.ObjectId
+  hero_title_first_line String
+  hero_title_second_line String
+  hero_title_third_line String
+  about_me_title String
   about_me_description String
+  my_projects_title String
+  my_tools_title String
+  contact_me_title String
   contact_me_description String
 }
 
@@ -57,4 +64,5 @@ model Metadata {
   title String
   description String
   keywords String[]
+  image       String
 }

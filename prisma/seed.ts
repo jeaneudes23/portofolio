@@ -125,7 +125,14 @@ export async function main() {
 
   await prisma.content.create({
     data: {
+      hero_title_first_line: '👋, I am Jean Eudes',
+      hero_title_second_line: 'FullStack',
+      hero_title_third_line: 'Web Developer',
+      about_me_title: 'About Me',
       about_me_description: "Hey there! I'm a passionate fullstack web developer with a knack for bringing ideas to life through code. I'm flexible and always up for learning new technologies to get the job done.",
+      my_tools_title: 'Tools & frameworks I use',
+      my_projects_title: 'My Projects',
+      contact_me_title: 'Contact Me',
       contact_me_description: "If you have any questions or are interested in working together, please complete the form below to reach out"
     }
   })
@@ -147,7 +154,8 @@ export async function main() {
     data: {
       title: 'Jean Eudes Nihangaza',
       description: 'Web Developer Based In Rwanda',
-      keywords: ['web', 'developer', 'web developer', 'software developer']
+      keywords: ['web', 'developer', 'web developer', 'software developer'],
+      image: "https://hoopshype.com/lists/78-greatest-nba-players-ever-hoopshype-list/"
     }
   })
 }
