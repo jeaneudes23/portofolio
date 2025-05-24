@@ -1,7 +1,7 @@
 import { AdminNavbar } from "@/components/AdminNavbar";
 import { EditAboutMeSection } from "@/components/EditAboutMeSection";
 import { EditHeroSection } from "@/components/EditHeroSection";
-import { EditToolsSection } from "@/features/tools/EditToolsSection";
+import { EditToolsSection } from "@/features/tools/components/EditToolsSection";
 import prisma from "@/lib/prisma";
 import React from "react";
 

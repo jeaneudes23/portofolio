@@ -28,6 +28,10 @@ const buttonVariants = cva("inline-flex cursor-pointer items-center justify-cent
   },
 });
 
+export interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
 function Button({
   className,
   variant,

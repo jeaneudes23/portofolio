@@ -1,9 +1,8 @@
+import { EditContent } from "@/features/content/components/EditContent";
 import { Tool } from "@prisma/client";
 import { Code } from "lucide-react";
 import React from "react";
-import { EditContent } from "../content/components/EditContent";
-import Image from "next/image";
-import { EditableToolCard } from "./EditableToolCard";
+import { EditableToolCard, NewToolModal } from "./EditableToolCard";
 
 interface Props {
   my_tools_title: string;
@@ -20,6 +19,7 @@ export const EditToolsSection = ({ my_tools_title, tools }: Props) => {
         {tools.map((tool) => (
           <EditableToolCard key={tool.id} tool={tool} />
         ))}
+        <NewToolModal />
       </div>
     </div>
   );

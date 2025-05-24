@@ -1,8 +1,10 @@
 "use client";
 
+import { File, X } from "lucide-react";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo, CloudinaryUploadWidgetResults } from "next-cloudinary";
 import Image from "next/image";
 import React, { useState } from "react";
+import { Button } from "./ui/button";
 
 interface Props {
   name: string;
@@ -25,13 +27,15 @@ export const CustomFileUploader = ({ defaultUrl, name }: Props) => {
       {({ open }) => {
         return (
           <div className="grid gap-1">
-            <div className="flex">
+            <div className="flex items-center">
               {previewUrl ? (
-                <button className="btn btn-sm ml-auto cursor-pointer bg-red-600" type="button" onClick={() => setPreviewUrl(null)}>
-                  Remove
-                </button>
+                <Button className="z-10 -mb-14 ml-auto !h-auto rounded-full !p-2" type="button" onClick={() => setPreviewUrl(null)}>
+                  <span className="sr-only">remove image</span>
+                  <X className="size-5" />
+                </Button>
               ) : (
-                <button className="btn btn-sm btn-accent cursor-pointer" type="button" onClick={() => open()}>
+                <button className="bg-secondary flex w-full cursor-pointer items-center justify-center gap-1 rounded-xl p-6 text-sm font-medium" type="button" onClick={() => open()}>
+                  <File className="size-5" />
                   Upload an Image
                 </button>
               )}
