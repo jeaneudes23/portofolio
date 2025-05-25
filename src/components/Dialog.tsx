@@ -41,8 +41,8 @@ const DialogContent = ({ children }: PropsWithChildren) => {
   );
 };
 
-const DialogHeader = ({ children }: ComponentProps<"div">) => {
-  return <div className="mb-6">{children}</div>;
+const DialogHeader = ({ children, className }: ComponentProps<"div">) => {
+  return <div className={cn("mb-6", className)}>{children}</div>;
 };
 
 const DialogTitle = ({ className, children }: ComponentProps<"div">) => {

@@ -12,6 +12,7 @@ import { useServerActionToast } from "@/hooks/useServerActionToast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { CustomFileUploader } from "@/components/CustomFileUploader";
+import { FormFieldError } from "@/components/FormFieldError";
 
 export const EditMetadataModalForm = ({ metadata }: { metadata: Metadata }) => {
   const [state, action] = useActionState(editMetadata, {});
@@ -36,22 +37,27 @@ export const EditMetadataModalForm = ({ metadata }: { metadata: Metadata }) => {
           <DialogTitle>Edit Metadata</DialogTitle>
         </DialogHeader>
         <form action={action} className="grid gap-6">
+          <input type="hidden" name="id" value={metadata.id} />
           <div className="grid gap-4">
             <div className="grid gap-1">
               <Label htmlFor="title">Title</Label>
               <Input defaultValue={metadata.title} type="text" name="title" id="title" />
+              <FormFieldError error={state.errors?.title} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="description">Description</Label>
               <Textarea defaultValue={metadata.description} name="description" id="description" />
+              <FormFieldError error={state.errors?.description} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="keywords">keywords</Label>
               <Input defaultValue={metadata.keywords} type="text" name="keywords" id="keywords" />
+              <FormFieldError error={state.errors?.keywords} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="image">image</Label>
               <CustomFileUploader defaultUrl={metadata.image} name="image" />
+              <FormFieldError error={state.errors?.image} />
             </div>
           </div>
           <div className="flex items-center gap-2">

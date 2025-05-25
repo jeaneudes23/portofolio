@@ -2,10 +2,12 @@
 
 import { SubmitButton } from "@/components/SubmitButton";
 import { Content } from "@prisma/client";
-import React, { PropsWithChildren, useRef, useState, useTransition } from "react";
+import React, { PropsWithChildren, useCallback, useRef, useState, useTransition } from "react";
 import { editContent } from "../server-actions/content-server-actions";
 import { Pencil } from "lucide-react";
-import toast from "react-hot-toast";
+import { ServerActionResponse } from "@/lib/types";
+import { useServerActionToast } from "@/hooks/useServerActionToast";
+import { FormFieldError } from "@/components/FormFieldError";
 
 interface Props extends PropsWithChildren {
   field: keyof Content;
@@ -18,6 +20,8 @@ export const EditContent = ({ className, children, field }: Props) => {
   const [isSaving, startTransition] = useTransition();
   const [editMode, setEditMode] = useState<boolean>(false);
 
+  const [state, setState] = useState<ServerActionResponse>({});
+
   const saveContent = () => {
     startTransition(async () => {
       const value = contentRef.current?.textContent ? contentRef.current.textContent : "";
@@ -26,16 +30,15 @@ export const EditContent = ({ className, children, field }: Props) => {
       formData.set("value", value);
 
       const response = await editContent(formData);
-      if (response.message) {
-        if (response.ok) {
-          toast.success(response.message);
-          setEditMode(false);
-        } else {
-          toast.error(response.message);
-        }
-      }
+      setState(response);
     });
   };
+
+  const callback = useCallback(() => {
+    setEditMode(false);
+  }, [setEditMode]);
+
+  useServerActionToast({ state, callback });
 
   return (
     <div className="group relative">
@@ -49,9 +52,10 @@ export const EditContent = ({ className, children, field }: Props) => {
       <div contentEditable={editMode} suppressContentEditableWarning ref={contentRef} className={`${editMode ? "outline-primary rounded-md p-3 outline-2" : ""} ${className}`}>
         {children}
       </div>
+      <FormFieldError error={state.errors?.value} />
       {editMode && (
         <div className="flex justify-end gap-2 py-2 text-sm">
-          <button onClick={() => setEditMode(false)} className="bg-card cursor-pointer rounded-md border px-3 py-2 font-medium">
+          <button disabled={state.errors?.value ? true : false} onClick={() => setEditMode(false)} className="bg-card cursor-pointer rounded-md border px-3 py-2 font-medium">
             Cancel
           </button>
           <SubmitButton disabled={isSaving} onClick={saveContent} className="bg-primary text-primary-foreground cursor-pointer rounded-md border px-3 py-2 font-medium">

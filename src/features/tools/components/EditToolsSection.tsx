@@ -2,7 +2,8 @@ import { EditContent } from "@/features/content/components/EditContent";
 import { Tool } from "@prisma/client";
 import { Code } from "lucide-react";
 import React from "react";
-import { EditableToolCard, NewToolModal } from "./EditableToolCard";
+import { EditableToolCard } from "./EditableToolCard";
+import { NewToolModal } from "./NewToolModal";
 
 interface Props {
   my_tools_title: string;

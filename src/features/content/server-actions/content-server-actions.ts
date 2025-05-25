@@ -3,27 +3,33 @@
 import prisma from "@/lib/prisma"
 import { ServerActionResponse } from "@/lib/types"
 import { revalidatePath } from "next/cache"
+import { contentSchema } from "../schema/content-schema"
 
 export async function editContent(formData: FormData): Promise<ServerActionResponse> {
+
   const rawFormData = Object.fromEntries(formData)
 
-  const field = rawFormData.field.toString()
-  const value = rawFormData.value.toString()
+  const validated = contentSchema.safeParse(rawFormData)
 
-  const content = await prisma.content.findFirst()
-
-  if (!content) return {
-    ok: false,
-    message: 'Operation failed'
+  if (validated.error) {
+    return {
+      ok: false,
+      message: 'Validation Error',
+      errors: validated.error.flatten().fieldErrors
+    }
   }
 
   try {
+    const content = await prisma.content.findFirst()
+
+    if (!content) throw new Error('DB Error')
+
     await prisma.content.update({
       where: {
         id: content.id
       },
       data: {
-        [field]: value
+        [validated.data.field]: validated.data.value
       }
     })
   } catch (error) {
@@ -37,7 +43,7 @@ export async function editContent(formData: FormData): Promise<ServerActionRespo
   revalidatePath('/')
   return {
     ok: true,
-    message: field + ' updated'
+    message: validated.data.field + ' updated'
   }
 
 }

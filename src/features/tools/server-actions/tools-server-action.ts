@@ -3,14 +3,29 @@
 import prisma from "@/lib/prisma";
 import { ServerActionResponse } from "@/lib/types";
 import { revalidatePath } from "next/cache";
+import { toolSchema } from "../schema/tool-schema";
 
 export async function editTool(prev: unknown, formData: FormData): Promise<ServerActionResponse> {
 
   const id = formData.get("id") as string
 
-  const name = formData.get("name") as string
-  const order = parseInt(formData.get("order") as string)
-  const icon = formData.get("icon") as string
+  const rawFormdata = {
+    name: formData.get('name') as string,
+    order: formData.get('order') as string,
+    icon: formData.get('icon') as string
+  }
+  const formattedData = { ...rawFormdata, order: parseInt(rawFormdata.order) }
+
+  const validated = toolSchema.safeParse(formattedData)
+
+  if (validated.error) {
+    return {
+      ok: false,
+      message: 'Validation error',
+      errors: validated.error.flatten().fieldErrors,
+      prevs: rawFormdata
+    }
+  }
 
   if (!id) return {
     ok: false,
@@ -22,9 +37,7 @@ export async function editTool(prev: unknown, formData: FormData): Promise<Serve
       where: {
         id: id
       },
-      data: {
-        name, order, icon
-      }
+      data: validated.data
     })
   } catch (error) {
     console.error(error)
@@ -71,23 +84,35 @@ export async function deleteTool(prev: unknown, formData: FormData): Promise<Ser
 }
 
 export async function createTool(prev: unknown, formData: FormData): Promise<ServerActionResponse> {
-  const name = formData.get("name") as string;
-  const order = parseInt(formData.get("order") as string);
-  const icon = formData.get("icon") as string;
+
+  const rawFormdata = {
+    name: formData.get('name') as string,
+    order: formData.get('order') as string,
+    icon: formData.get('icon') as string
+  }
+  const formattedData = { ...rawFormdata, order: parseInt(rawFormdata.order) }
+
+  const validated = toolSchema.safeParse(formattedData)
+
+  if (validated.error) {
+    return {
+      ok: false,
+      message: 'Validation error',
+      errors: validated.error.flatten().fieldErrors,
+      prevs: rawFormdata
+    }
+  }
 
   try {
     await prisma.tool.create({
-      data: {
-        name,
-        order,
-        icon
-      }
+      data: validated.data
     });
   } catch (error) {
     console.error(error)
     return {
       ok: false,
-      message: "DB error"
+      message: "DB error",
+      prevs: rawFormdata,
     };
   }
 

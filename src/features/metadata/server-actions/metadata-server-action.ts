@@ -3,29 +3,43 @@
 import prisma from "@/lib/prisma";
 import { ServerActionResponse } from "@/lib/types";
 import { revalidatePath } from "next/cache";
+import { metadataSchema } from "../schema/metadata-schema";
 
 export async function editMetadata(_prev: unknown, formData: FormData): Promise<ServerActionResponse> {
-  const title = formData.get("title") as string
-  const description = formData.get("description") as string
-  const keywords = formData.get("keywords") as string
-  const image = formData.get("image") as string
 
-  const metadata = await prisma.metadata.findFirst()
+  const id = formData.get("id") as string
 
-  if (!metadata) return {
-    ok: false,
-    message: 'Operation failed'
+  const rawFormData = {
+    title: formData.get("title") as string,
+    description: formData.get("description") as string,
+    keywords: formData.get("keywords") as string,
+    image: formData.get("image") as string,
+  }
+
+  const formattedData = { ...rawFormData, keywords: rawFormData.keywords.split(',').map(tag => tag.trim()) }
+
+  const validated = metadataSchema.safeParse(formattedData)
+
+  if (validated.error) {
+    return {
+      ok: false,
+      message: 'Validation error',
+      errors: validated.error.flatten().fieldErrors,
+      prevs: rawFormData
+    }
   }
 
   try {
     await prisma.metadata.update({
-      where: {
-        id: metadata.id
-      },
-      data: { title, description, keywords: keywords.split(',').map(keyword => keyword.trim()), image }
+      where: { id },
+      data: validated.data
     })
   } catch (error) {
     console.log(error)
+    return {
+      ok: false,
+      message: 'DB Error'
+    }
   }
 
   revalidatePath('/')

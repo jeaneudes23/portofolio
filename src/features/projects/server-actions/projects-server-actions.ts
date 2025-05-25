@@ -3,20 +3,37 @@
 import prisma from "@/lib/prisma";
 import { ServerActionResponse } from "@/lib/types";
 import { revalidatePath } from "next/cache";
+import { projectSchema } from "../schema/project-schema";
 
 export async function editProject(prev: unknown, formData: FormData): Promise<ServerActionResponse> {
   const id = formData.get("id") as string
-  const name = formData.get("name") as string
-  const image = formData.get("image") as string
-  const order = parseInt(formData.get("order") as string)
-  const url = formData.get("url") as string
-  const summary = formData.get("summary") as string
-  const categoryId = formData.get("categoryId") as string
+
+  const rawFormData = {
+    name: formData.get("name") as string,
+    image: formData.get("image") as string,
+    order: formData.get("order") as string,
+    url: formData.get("url") as string,
+    summary: formData.get("summary") as string,
+    categoryId: formData.get("categoryId") as string
+  }
+
+  const formattedData = { ...rawFormData, order: parseInt(rawFormData.order) }
+
+  const validated = projectSchema.safeParse(formattedData)
+
+  if (validated.error) {
+    return {
+      ok: false,
+      message: 'Validation error',
+      errors: validated.error.flatten().fieldErrors,
+      prevs: rawFormData
+    }
+  }
 
   try {
     await prisma.project.update({
       where: { id },
-      data: { name, image, order, url, summary, categoryId }
+      data: validated.data
     })
   } catch (error) {
     console.error(error)
@@ -27,6 +44,7 @@ export async function editProject(prev: unknown, formData: FormData): Promise<Se
   }
 
   revalidatePath('/')
+
   return {
     ok: true,
     message: "Project updated"
@@ -34,18 +52,30 @@ export async function editProject(prev: unknown, formData: FormData): Promise<Se
 }
 
 export async function createProject(prev: unknown, formData: FormData): Promise<ServerActionResponse> {
-  const name = formData.get("name") as string
-  const image = formData.get("image") as string
-  const order = parseInt(formData.get("order") as string)
-  const url = formData.get("url") as string
-  const summary = formData.get("summary") as string
-  const categoryId = formData.get("categoryId") as string
+  const rawFormData = {
+    name: formData.get("name") as string,
+    image: formData.get("image") as string,
+    order: formData.get("order") as string,
+    url: formData.get("url") as string,
+    summary: formData.get("summary") as string,
+    categoryId: formData.get("categoryId") as string
+  }
+  const formattedData = { ...rawFormData, order: parseInt(rawFormData.order) }
+
+  const validated = projectSchema.safeParse(formattedData)
+
+  if (validated.error) {
+    return {
+      ok: false,
+      message: 'Validation error',
+      errors: validated.error.flatten().fieldErrors,
+      prevs: rawFormData
+    }
+  }
 
   try {
     await prisma.project.create({
-      data: {
-        name, image, order, url, summary, categoryId
-      }
+      data: validated.data
     })
   } catch (error) {
     console.error(error)
