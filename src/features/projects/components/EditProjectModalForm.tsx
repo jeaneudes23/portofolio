@@ -16,6 +16,7 @@ import { SelectItem } from "@/components/ui/select";
 import { editProject } from "../server-actions/projects-server-actions";
 import { useServerActionToast } from "@/hooks/useServerActionToast";
 import { useRouter } from "next/navigation";
+import { FormFieldError } from "@/components/FormFieldError";
 
 export const EditProjectModalForm = ({ project, categories }: { project: Project; categories: Category[] }) => {
   const [state, action] = useActionState(editProject, {});
@@ -41,18 +42,21 @@ export const EditProjectModalForm = ({ project, categories }: { project: Project
         </DialogHeader>
         <form action={action} className="grid gap-6">
           <input type="hidden" name="id" value={project.id} />
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid items-start gap-3 md:grid-cols-2">
             <div className="grid gap-1">
               <Label htmlFor="name">Name</Label>
               <Input defaultValue={project.name} type="text" className="form-input" name="name" id="name" />
+              <FormFieldError error={state.errors?.name} />
             </div>
             <div className="grid gap-1">
-              <Label htmlFor="name">Order</Label>
+              <Label htmlFor="order">Order</Label>
               <Input defaultValue={project.order} type="number" className="form-input" name="order" id="order" />
+              <FormFieldError error={state.errors?.order} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="url">URL</Label>
               <Input defaultValue={project.url} name="url" id="url" />
+              <FormFieldError error={state.errors?.url} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="categoryId">Category</Label>
@@ -63,14 +67,17 @@ export const EditProjectModalForm = ({ project, categories }: { project: Project
                   </SelectItem>
                 ))}
               </CustomSelect>
+              <FormFieldError error={state.errors?.categoryId} />
             </div>
             <div className="col-span-full grid gap-1">
               <Label htmlFor="summary">Summary</Label>
               <Textarea defaultValue={project.summary} name="summary" />
+              <FormFieldError error={state.errors?.summary} />
             </div>
             <div className="col-span-full grid gap-1">
               <Label htmlFor="image">Image</Label>
               <CustomFileUploader defaultUrl={project.image} name="image" />
+              <FormFieldError error={state.errors?.image} />
             </div>
           </div>
           <div className="flex items-center gap-2">

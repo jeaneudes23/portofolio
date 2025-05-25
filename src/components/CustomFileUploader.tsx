@@ -41,7 +41,7 @@ export const CustomFileUploader = ({ defaultUrl, name }: Props) => {
               )}
             </div>
             {previewUrl && (
-              <div className="bg-secondary rounded-xl p-4">
+              <div className="bg-secondary rounded-xl border p-4">
                 <Image alt="preview" src={previewUrl} width={0} height={0} className="mx-auto max-h-52 w-auto" />
               </div>
             )}

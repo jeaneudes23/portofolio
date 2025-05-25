@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/Dialog";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/Dialog";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { createLink, deleteLink, editLink } from "../server-actions/links-server-actions";
 import { useServerActionToast } from "@/hooks/useServerActionToast";
+import { FormFieldError } from "@/components/FormFieldError";
 
 export const ManageLinksModal = ({ links }: { links: Link[] }) => {
   return (
@@ -20,8 +21,12 @@ export const ManageLinksModal = ({ links }: { links: Link[] }) => {
         <LinkIcon className="size-5" />
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="flex items-center justify-between">
           <DialogTitle>Manage links</DialogTitle>
+          <DialogClose variant={"secondary"} size={"icon"}>
+            <span className="sr-only">Close</span>
+            <X />
+          </DialogClose>
         </DialogHeader>
         <CreateLinkForm />
         <div className="divide-y py-4">
@@ -44,14 +49,16 @@ const CreateLinkForm = () => {
   useServerActionToast({ state, callback });
   return (
     <form action={action} className="grid gap-2">
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid items-start gap-2 sm:grid-cols-2">
         <div className="grid gap-1">
           <Label htmlFor="name">Name</Label>
-          <Input name="name" id="name" />
+          <Input name="name" id="name" defaultValue={state.prevs?.name} />
+          <FormFieldError error={state.errors?.name} />
         </div>
         <div className="grid gap-1">
           <Label htmlFor="url">URL</Label>
-          <Input name="url" id="url" />
+          <Input name="url" id="url" defaultValue={state.prevs?.url} />
+          <FormFieldError error={state.errors?.url} />
         </div>
       </div>
       <div>
@@ -101,14 +108,16 @@ const EditLinkForm = ({ link, cancel }: { link: Link; cancel: () => void }) => {
   return (
     <form action={action} className="grid gap-2">
       <input type="hidden" name="id" value={link.id} />
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid items-start gap-2 sm:grid-cols-2">
         <div className="grid gap-1">
           <Label htmlFor="name">Name</Label>
           <Input defaultValue={link.name} name="name" id="name" />
+          <FormFieldError error={state.errors?.name} />
         </div>
         <div className="grid gap-1">
           <Label htmlFor="url">URL</Label>
           <Input defaultValue={link.url} name="url" id="url" />
+          <FormFieldError error={state.errors?.url} />
         </div>
       </div>
       <div className="flex items-center gap-2">

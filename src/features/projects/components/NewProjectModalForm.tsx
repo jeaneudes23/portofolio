@@ -12,6 +12,7 @@ import { Category } from "@prisma/client";
 import { CustomSelect } from "@/components/CustomSelect";
 import { SelectItem } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import { FormFieldError } from "@/components/FormFieldError";
 
 export const NewProjectModalForm = ({ categories }: { categories: Category[] }) => {
   const [state, action] = useActionState(createProject, {});
@@ -35,36 +36,42 @@ export const NewProjectModalForm = ({ categories }: { categories: Category[] }) 
           <DialogTitle>Add a new project</DialogTitle>
         </DialogHeader>
         <form action={action} className="grid gap-6">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid items-start gap-3 md:grid-cols-2">
             <div className="grid gap-1">
               <Label htmlFor="name">Name</Label>
-              <Input type="text" className="form-input" name="name" id="name" />
+              <Input type="text" className="form-input" name="name" id="name" defaultValue={state.prevs?.name} />
+              <FormFieldError error={state.errors?.name} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="name">Order</Label>
-              <Input type="number" className="form-input" name="order" id="order" />
+              <Input type="number" className="form-input" name="order" id="order" defaultValue={state.prevs?.order} />
+              <FormFieldError error={state.errors?.order} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="url">URL</Label>
-              <Input name="url" id="url" />
+              <Input name="url" id="url" defaultValue={state.prevs?.url} />
+              <FormFieldError error={state.errors?.url} />
             </div>
             <div className="grid gap-1">
               <Label htmlFor="categoryId">Category</Label>
-              <CustomSelect name="categoryId">
+              <CustomSelect defaultValue={state.prevs?.categoryId} name="categoryId">
                 {categories.map((category) => (
                   <SelectItem key={category.id} value={category.id}>
                     {category.name}
                   </SelectItem>
                 ))}
               </CustomSelect>
+              <FormFieldError error={state.errors?.categoryId} />
             </div>
             <div className="col-span-full grid gap-1">
               <Label htmlFor="summary">Summary</Label>
-              <Textarea name="summary" />
+              <Textarea name="summary" defaultValue={state.prevs?.summary} />
+              <FormFieldError error={state.errors?.summary} />
             </div>
             <div className="col-span-full grid gap-1">
               <Label htmlFor="image">Image</Label>
-              <CustomFileUploader name="image" />
+              <CustomFileUploader name="image" defaultUrl={state.prevs?.image} />
+              <FormFieldError error={state.errors?.image} />
             </div>
           </div>
           <div className="flex items-center gap-2">
