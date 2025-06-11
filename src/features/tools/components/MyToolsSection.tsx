@@ -14,7 +14,7 @@ export const MyToolsSection = ({ my_tools_title, tools }: Props) => {
       <h3 className="flex items-center justify-end gap-2 font-semibold lg:text-lg">
         <Code className="size-5" /> {my_tools_title}
       </h3>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+      <div className="grid grid-cols-2 gap-3 lg:gap-4 sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
         {tools.map((tool) => (
           <div key={tool.id} className="bg-card group ring-accent relative cursor-pointer rounded-md p-6 shadow transition-all hover:z-10 hover:scale-110 hover:ring-2">
             <Image src={tool.icon} alt={tool.name} width={0} height={0} className="mx-auto aspect-square w-full max-w-24 object-contain" />
