@@ -6,6 +6,7 @@ import { Mail } from "lucide-react";
 import React, { useActionState } from "react";
 import { sendMail } from "../server-actions/send-mail";
 import { useServerActionToast } from "@/hooks/useServerActionToast";
+import { FormFieldError } from "@/components/FormFieldError";
 
 export const ContactForm = () => {
   const [state, action] = useActionState(sendMail, {});
@@ -19,19 +20,22 @@ export const ContactForm = () => {
           <Label htmlFor="name" className="bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight">
             Name
           </Label>
-          <input className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="name" id="name" />
+          <input defaultValue={state.prevs?.name} className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="name" id="name" />
+          <FormFieldError error={state.errors?.name} />
         </div>
         <div className="grid">
           <Label htmlFor="email" className="bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight">
             Email
           </Label>
-          <input className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="email" id="email" />
+          <input defaultValue={state.prevs?.email} className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" type="text" name="email" id="email" />
+          <FormFieldError error={state.errors?.email} />
         </div>
         <div className="col-span-full grid">
           <Label htmlFor="message" className="bg-background ml-2 w-fit translate-y-1/2 p-1 font-medium tracking-tight">
             Message
           </Label>
-          <textarea rows={4} className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" name="message" id="message"></textarea>
+          <textarea defaultValue={state.prevs?.message} rows={4} className="bg-background focus-within:border-primary w-full rounded-md border-2 p-3 transition-colors outline-none" name="message" id="message" />
+          <FormFieldError error={state.errors?.message} />
         </div>
       </div>
       <div className="flex justify-center">
