@@ -12,7 +12,7 @@ export const ContactMeSection = ({ contact_me_title, contact_me_description }: P
   return (
     <section className="my-section px-padding relative container">
       <div
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-80"
         style={{
           backgroundImage: "url('/wrapped.svg')",
           backgroundSize: "contain",
