@@ -3,6 +3,7 @@ import { Golos_Text } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components/Navbar";
+import { SessionProvider } from "next-auth/react";
 
 const fontSans = Golos_Text({
   variable: "--font-golos-text",
@@ -22,12 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${fontSans.variable} text-foreground bg-background font-sans antialiased transition-colors`}>
-        <Navbar />
-        {children}
-        <Toaster />
-      </body>
-    </html>
+    <SessionProvider>
+      <html lang="en">
+        <body className={`${fontSans.variable} text-foreground bg-background font-sans antialiased transition-colors`}>
+          <Navbar />
+          {children}
+          <Toaster />
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
