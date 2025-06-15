@@ -8,7 +8,6 @@ export const {
 } = NextAuth({
   callbacks: {
     async signIn({ user }) {
-      console.log(user)
       return user.email === process.env.ADMIN_EMAIL
     }
   },
