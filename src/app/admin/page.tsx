@@ -7,6 +7,8 @@ import { EditToolsSection } from "@/features/tools/components/EditToolsSection";
 import prisma from "@/lib/prisma";
 import React from "react";
 
+export const revalidate = 0
+
 export default async function page() {
   const [content, tools, categoriesWithProjects, links, metadata] = await Promise.all([
     prisma.content.findFirst(),
