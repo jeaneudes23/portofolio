@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components/Navbar";
 import { SessionProvider } from "next-auth/react";
+import { Analytics } from "@vercel/analytics/next";
 
 const fontSans = Golos_Text({
   variable: "--font-golos-text",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Toaster />
+          <Analytics />
         </body>
       </html>
     </SessionProvider>
